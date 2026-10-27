@@ -1,48 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Vulnerable Mini App Test</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #1c1c1e; color: white; }
-        .box { padding: 15px; margin-bottom: 15px; border-radius: 8px; }
-        .original { background: #0a84ff; border: 1px solid #005bb5; }
-        .spoofed { background: #ff453a; border: 1px solid #b3241b; }
-        h2 { text-align: center; }
-    </style>
+    <meta charset="UTF-8">
+    <!-- Вот наш вредоносный код в мета-теге -->
+    <meta property="og:title" content="<img src=x onerror=alert('XSS_PREVIEW')>">
+    <meta property="og:description" content="Test description">
+    <title>Preview Test</title>
 </head>
 <body>
-    <h2>Тест подмены данных</h2>
-    
-    <div class="box original">
-        <h3>Реальные данные (от Telegram):</h3>
-        <p>ID: <strong id="real-id">Загрузка...</strong></p>
-        <p>Имя: <strong id="real-name">Загрузка...</strong></p>
-    </div>
-
-    <div class="box spoofed">
-        <h3>Подмененные данные (Хакер):</h3>
-        <p>ID: <strong id="fake-id">999999999</strong></p>
-        <p>Имя: <strong id="fake-name">Hacker</strong></p>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-
-        // 1. Показываем РЕАЛЬНЫЕ данные, которые передал Telegram
-        const realUser = tg.initDataUnsafe?.user;
-        if (realUser) {
-            document.getElementById('real-id').innerText = realUser.id;
-            document.getElementById('real-name').innerText = realUser.first_name;
-        } else {
-            document.getElementById('real-id').innerText = 'Нет данных (открой в Telegram)';
-            document.getElementById('real-name').innerText = 'Нет данных';
-        }
-
-        // 2. Блок с подменой жестко зашит в HTML (мы его просто показываем)
-        // В реальной атаке злоумышленник мог бы через XSS или подмену JS 
-        // заставить бэкенд думать, что он - это пользователь с ID 999999999.
-    </script>
+    <h1>Если ты видишь это, значит, превью загрузилось.</h1>
 </body>
 </html>
