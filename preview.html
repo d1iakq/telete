@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Вот наш вредоносный код в мета-теге -->
+    <meta property="og:title" content="<img src=x onerror=alert('XSS_PREVIEW')>">
+    <meta property="og:description" content="Test description">
+    <title>Preview Test</title>
+</head>
+<body>
+    <h1>Если ты видишь это, значит, превью загрузилось.</h1>
+</body>
+</html>
